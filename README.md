@@ -2,9 +2,9 @@
 ----------------------------------
 
 Topics:
-* Naming Conventions
-* BEM
+* jQuery 
 * Constructors with ES6 class syntax
+* `data` attributes
 
 You will be building on your prior work from Components-BEM by adding a `Tabs` component.
 
@@ -20,7 +20,5 @@ You may need to adjust some of the naming for the usuage of `Box` in the HTML pr
 ## Resources
 
   Data Attributes: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
-
-  BEM: http://getbem.com/naming/
   
   Constructors (and factory function): https://medium.com/javascript-scene/javascript-factory-functions-vs-constructor-functions-vs-classes-2f22ceddf33e

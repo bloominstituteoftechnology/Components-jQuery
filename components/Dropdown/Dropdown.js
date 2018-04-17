@@ -1,17 +1,18 @@
 class Dropdown {
-  constructor(element) {
-    this.element = element;
-    this.button = this.element.querySelector(".Dropdown__button");
-
-    this.button.addEventListener("click", () => {
+  constructor($element) {
+    this.element = $element;
+    this.button = this.element.find(".dropdown-button");
+    this.content = this.element.find(".dropdown-content");
+    this.button.click( () => {
       this.toggleContent();
     });
   }
 
   toggleContent() {
-    this.element.classList.toggle("Dropdown--active");
+    // this.content.toggleClass('dropdown-hidden')
+    this.content.slideToggle(500)
   }
 }
 
-let dropdowns = document.querySelectorAll(".Dropdown");
-dropdowns = Array.from(dropdowns).map(dropdown => new Dropdown(dropdown));
+let $dropdown = $('.dropdown');
+$dropdown = new Dropdown($dropdown);
