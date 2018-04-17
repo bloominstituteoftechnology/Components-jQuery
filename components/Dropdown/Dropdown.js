@@ -1,16 +1,15 @@
 class Dropdown {
   constructor($element) {
-    this.element = $element;
-    this.button = this.element.find(".dropdown-button");
-    this.content = this.element.find(".dropdown-content");
-    this.button.click( () => {
-      this.toggleContent();
-    });
+    this.element 
+    // Select button and content from the element
+    this.button
+    this.content 
+    // Add a click handler to the button
+
   }
 
   toggleContent() {
-    // this.content.toggleClass('dropdown-hidden')
-    this.content.slideToggle(500)
+    // Add/remove class to/from content
   }
 }
 
