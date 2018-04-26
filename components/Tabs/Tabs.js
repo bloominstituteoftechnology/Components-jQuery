@@ -17,31 +17,23 @@ class TabsItem {
 
 class TabsLink {
   constructor($element, parent) {
-    // Attach the element to this instance of the TabsLink class
-    this.element;
-    // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
-    /* Use the getTab method on the parent to find the corresponding TabItem for this link
-       hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab();
-    // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem;
-    /* Add an click event to the main element, this will update the active tab on the parent, 
-       and should call select on this tab */
-    this.element.click( () => {
+    this.element = $element;
+    this.tabs = parent; // Attach Tabs to this instance of tab links
+    this.tabsItem = parent.getTab(this.element.data('tab')); // Get jQuery selector for corresponding tab item
+    this.tabsItem = new TabsItem(this.tabsItem); // Use tabsItem selector to create a new instance of TabsItem
+    this.element.click( () => { // Click event calls parent's method to update active tab
       this.tabs.updateActive(this);
-
     });
   };
 
   select() {
-    // add selected class to this link
-    // select the associated tab item
+    this.element.addClass('tabs-link-selected'); // Add selected class to tab link
+    this.tabsItem.select(); // Select associated tab item
   }
 
   deselect() {
-    // deselect this link
-    // deselect the associated tab item
+    this.element.removeClass('tabs-link-selected'); // Remove selected class from tab link
+    this.tabsItem.deselect(); // Deselect associated tab item
   }
 }
 
