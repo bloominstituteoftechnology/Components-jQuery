@@ -41,14 +41,14 @@ class TabsLink {
     // add selected class to this link
     this.element.addClass('tabs-link-selected')
     // select the associated tab item
-    this.tabsItem.element.addClass('tabs-item-selected')
+    this.tabsItem.select()
   }
 
   deselect() {
     // deselect this link
     this.element.removeClass('tabs-link-selected')
     // deselect the associated tab item
-    this.tabsItem.element.removeClass('tabs-item-selected')
+    this.tabsItem.deselect()
   }
 }
 
