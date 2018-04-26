@@ -93,4 +93,4 @@ class Tabs {
    of the Tabs class with the element */
 let tabs = $('.tabs');
 tabs = tabs.map((index, tab) => new Tabs($(tab)));
-console.log(tabs)
+
