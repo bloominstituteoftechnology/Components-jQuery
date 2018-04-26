@@ -1,5 +1,33 @@
 **COMPONENTS-JQUERY**
 ----------------------------------
+## Components - jQuery
+
+### Part 1 - The Dropdown
+- [ ] Study the HTML in the index.html file that corresponds to the dropdown component
+- [ ] Study the LESS file in the Dropdown folder
+- [ ] Complete the `Dropdown.js` file using your HTML/CSS knowledge
+
+### Part 2 - Tabs
+- [ ] Study the HTML and LESS corresponding to the Tabs component
+- [ ] Create the Tabs component
+- [ ] Create the TabsLink component
+- [ ] Create the TabsItem component
+- [ ] Add some Tabs to the HTML to see how the components work!
+
+### Stretch Goals
+- [ ] Make the dropdown slide in/out, rather than just appearing and disappearing
+- [ ] Get the TabsItem text to fade in/out OR slide in/out
+- [ ] Look through the LESS code and refactor using jQuery
+- [ ] Add styling using LESS files
+- [ ] Remove the boxes on the top card and replace them using an image carousel
+
+## Good Habits
+- [ ] Pull Request title is your first and last name (add any notes in the comment field)
+- [ ] Code has been committed regularly
+- [ ] Commit comments are informative
+- [ ] Code is organized in a logical way
+
+
 
 Topics:
 * jQuery 
