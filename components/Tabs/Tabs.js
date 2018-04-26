@@ -1,102 +1,89 @@
 
 class TabsItem {
   constructor(element) {
-    // Attach dom element to object. Example in Tabs class
     this.element = $(element);
   }
-
   select() {
-    this.element.addClass('tabs-item-selected')
-    // Selects the item by adding a class
-
-    /* Stretch goal: use a built in jQuery method to show the item */
+    this.element.addClass('tabs-item-selected');
   }
-
   deselect() {
-    this.element.removeClass('tabs-item-selected')
-
-    // Deselects the item by removing a class
-    /* Stretch goal: use a built in jQuery method to hide the item */
+    this.element.removeClass('tabs-item-selected');
   }
 }
 
+// Attach dom element to object. Example in Tabs class
+// Selects the item by adding a class
+/* Stretch goal: use a built in jQuery method to show the item */
+// Deselects the item by removing a class
+/* Stretch goal: use a built in jQuery method to hide the item */
 class TabsLink {
   constructor(element, parent) {
-    // Attach the element to this instance of the TabsLink class
     this.element = $(element);
-    // Attach Tabs (parent) to this instance of the TabsLink class
     this.tabs = parent
-    /* Use the getTab method on the parent to find the corresponding TabItem for this link
-       hint: use the data-tab attribute */
-
     this.tabsItem = parent.getTab(this.element.data('tab'));
-
-    // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
     this.tabsItem = new TabsItem(this.tabsItem);
-    /* Add an click event to the main element, this will update the active tab on the parent, 
-       and should call select on this tab */
-    this.element.click( () => {
+    this.element.click(() => {
       this.tabs.updateActive(this);
       this.select();
     });
   };
-
   select() {
     this.element.addClass('tabs-link-selected');
     this.tabsItem.select();
-    // add selected class to this link
-    // select the associated tab item
   }
-
   deselect() {
     this.element.removeClass('tabs-link-selected')
     this.tabsItem.deselect();
-    // deselect this link
-    // deselect the associated tab item
   }
 }
+
+// Attach the element to this instance of the TabsLink class
+// Attach Tabs (parent) to this instance of the TabsLink class
+/* Use the getTab method on the parent to find the corresponding TabItem for this link
+   hint: use the data-tab attribute */
+// Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
+/* Add an click event to the main element, this will update the active tab on the parent, 
+   and should call select on this tab */
+// add selected class to this link
+// select the associated tab item
+// deselect this link
+// deselect the associated tab item
+
 
 class Tabs {
   constructor(element) {
     this.element = $(element);
-
-    // Using jQuery's .find method, get an array of all links on the element
     this.links = this.element.find('.tabs-link');
-
-    // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
       return new TabsLink($(link), this);
     });
-
-    // Select the first Link and set it to the activeLink
-    this.activeLink  = this.links[0];
+    this.activeLink = this.links[0];
     this.init();
   }
-
   init() {
     this.activeLink.select();
-
-    // Select the first link and tab upon ititialization
   }
-
   updateActive(newActive) {
     this.activeLink.deselect();
-    // Deselect the old active link
     this.activeLink = newActive;
-    // Assign the new active link
-
   }
-
   getTab(data) {
     return this.element.find(`.tabs-item[data-tab="${data}"]`)
-    // Use the tab item classname and the data attribute to select the proper item
   }
 }
-
-/* Using jQuery, select all instances of the class tabs, map over it and create new instances 
-   of the Tabs class with the element */
 let tabs = $('.tabs');
-tabs = tabs.map(function(index, element) {
+tabs = tabs.map(function (index, element) {
   new Tabs(element);
 });
 
+
+
+    // Using jQuery's .find method, get an array of all links on the element
+    // This step will map over the array creating new TabsLink class isntances of each link.
+    // Select the first Link and set it to the activeLink
+    // Select the first link and tab upon ititialization
+    // Deselect the old active link
+    // Assign the new active link
+    // Use the tab item classname and the data attribute to select the proper item
+/* Using jQuery, select all instances of the class tabs, map over it and create new instances 
+   of the Tabs class with the element */
