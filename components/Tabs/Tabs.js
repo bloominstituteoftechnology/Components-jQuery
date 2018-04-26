@@ -2,6 +2,7 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $element;
   }
 
   select() {
@@ -14,6 +15,22 @@ class TabsItem {
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
+
+//   select() {
+//     // Selects the item by adding a class
+//     /* Stretch goal: use a built in jQuery method to show the item */
+//     $($element).click(function() {
+//       $($element).show();
+//     });
+//   }
+
+//   deselect() {
+//     // Deselects the item by removing a class
+//     /* Stretch goal: use a built in jQuery method to hide the item */
+//     $($element).click(function() {
+//       $($element).hide();
+//   });
+// }
 
 class TabsLink {
   constructor($element, parent) {
