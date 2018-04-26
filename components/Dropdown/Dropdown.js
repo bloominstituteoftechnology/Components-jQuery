@@ -10,6 +10,9 @@ class Dropdown {
 
   toggleContent() {
     // Add/remove class to/from content
+    this.content.animate({
+      height: 'toggle'
+    });
     this.content.toggleClass("dropdown-hidden");
   }
 }
