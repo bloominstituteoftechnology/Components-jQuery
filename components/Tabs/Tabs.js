@@ -1,4 +1,3 @@
-
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
