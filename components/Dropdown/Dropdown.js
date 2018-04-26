@@ -6,9 +6,9 @@ class Dropdown {
     this.content = this.element.find('.dropdown-content');
     // Add a click handler to the button
     /** Option-1 */
-    this.button.click( this.toggleContent.bind(this) );
+    // this.button.click( this.toggleContent.bind(this) ); // button.toggleContent()
     /** Option-2 */
-    // this.button.click( () => {this.toggleContent()} );
+    this.button.click( () => {this.toggleContent()} );
   }
 
   toggleContent() {
