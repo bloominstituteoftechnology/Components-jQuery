@@ -1,34 +1,36 @@
-
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $(element);
   }
 
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
+    this.element = this.addClass('tabs-item-selected')
   }
 
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
+    this.element = this.removeClass('tabs-item-selected')
   }
 }
 
 class TabsLink {
   constructor($element, parent) {
     // Attach the element to this instance of the TabsLink class
-    this.element;
+    this.element = $(element);
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
+    this.tabs = parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab();
+    this.tabsItem = parent.getTab(this.element[0].dataset.tab);
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem;
+    this.tabsItem = new TabsItem(this.tabsItem)
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
-    this.element.click( () => {
+    this.element.click(() => {
       this.tabs.updateActive(this);
 
     });
@@ -83,4 +85,3 @@ class Tabs {
    of the Tabs class with the element */
 let tabs = $();
 tabs = tabs.map();
-

@@ -1,11 +1,13 @@
 class Dropdown {
   constructor($element) {
-    this.element = $(element)
+    this.element = $element
     // Select button and content from the element
-    this.button = $(".dropdown-button");
-    this.content = $(".dropdown-content");
+    this.button = $element.find('.dropdown-button')
+    this.content = $element.find(".dropdown-content");
     // Add a click handler to the button
-    this.element.click( () => {this.toggleContent()} );
+    this.element.click(() => {
+      this.toggleContent()
+    });
   }
 
   toggleContent() {
