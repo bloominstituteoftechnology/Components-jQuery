@@ -81,6 +81,6 @@ class Tabs {
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
+let tabs = $('.tabs');
 tabs = tabs.map();
 
