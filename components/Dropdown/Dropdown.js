@@ -13,5 +13,5 @@ class Dropdown {
   }
 }
 
-let $dropdown = $('.dropdown');
+  let $dropdown = $('.dropdown');
 $dropdown = new Dropdown($dropdown);
