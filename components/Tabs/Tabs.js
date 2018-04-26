@@ -59,7 +59,7 @@ class Tabs {
     this.$element = $element;
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.$links = this.$element.find(".tabs-links");
+    this.$links = this.$element.find(".tabs-link");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.$links = this.$links.map((index, link) => {
@@ -88,7 +88,7 @@ class Tabs {
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
     console.log(data);
-    return $(".tab-items").find('[data-tab="' + data + '"]');
+    return $(".tabs-items").find('[data-tab="' + data + '"]');
   }
 
 }
