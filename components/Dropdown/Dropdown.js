@@ -4,11 +4,15 @@ class Dropdown {
     this.button = this.element.find('.dropdown-button');
     this.content = this.element.find('.dropdown-content');
     this.button.click(() => {this.toggleContent()});
+    this.init();
+  }
+
+  // Stretch goal: Refactor LESS using jQuery; got rid of display: none on dropdown content
+  init(){
+    this.content.hide();
   }
 
   toggleContent() {
-    // this.content.toggleClass('dropdown-hidden');
-
     // Stretch: Slide up/down animation
     if(this.content.is(':hidden')){
       this.content.slideDown();
