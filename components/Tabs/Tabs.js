@@ -82,7 +82,7 @@ class Tabs {
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
-    this.tabsItems = $(`.tabs-item[data-tab="${this.data}"]`);
+    return $(`.tabs-item[data-tab="${data}"]`);
   }
 
 }
