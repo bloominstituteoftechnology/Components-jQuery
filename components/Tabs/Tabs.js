@@ -2,35 +2,25 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
-    this.element = $element;
+    this.element = $(element);
   }
 
   select() {
-    // Selects the item by adding a class
-    /* Stretch goal: use a built in jQuery method to show the item */
-  }
+   // Selects the item by adding a class
+   /* Stretch goal: use a built in jQuery method to show the item */
+   $(element).click(function() {
+     $(element).show();
+     });
+   }
 
-  deselect() {
+   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
+    $(element).click(function() {
+      $(element).hide();
+    });
   }
 }
-
-//   select() {
-//     // Selects the item by adding a class
-//     /* Stretch goal: use a built in jQuery method to show the item */
-//     $($element).click(function() {
-//       $($element).show();
-//     });
-//   }
-
-//   deselect() {
-//     // Deselects the item by removing a class
-//     /* Stretch goal: use a built in jQuery method to hide the item */
-//     $($element).click(function() {
-//       $($element).hide();
-//   });
-// }
 
 class TabsLink {
   constructor($element, parent) {
@@ -63,11 +53,11 @@ class TabsLink {
 }
 
 class Tabs {
-  constructor($element) {
-    this.element = $element;
+  constructor(element) {
+    this.element = $(element);
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links;
+    this.links = this.links.find(".tabs-links");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
@@ -75,12 +65,13 @@ class Tabs {
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink;
+    this.activeLink = this.links;
     this.init();
   }
 
   init() {
-    // Select the first link and tab upon ititialization
+    // Select the first link and tab upon initialization
+    return links[0];
   }
 
   updateActive(newActive) {
