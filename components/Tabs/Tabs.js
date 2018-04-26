@@ -1,86 +1,105 @@
-
 class TabsItem {
-  constructor($element) {
-    // Attach dom element to object. Example in Tabs class
-  }
+    constructor($element) {
+	// Attach dom element to object. Example in Tabs class
+	this.element = $($element);
+    }
 
   select() {
     // Selects the item by adding a class
-    /* Stretch goal: use a built in jQuery method to show the item */
+    // Stretch goal: use a built in jQuery method to show the item
+      this.element.addClass("tabs-item-selected");
   }
 
   deselect() {
     // Deselects the item by removing a class
-    /* Stretch goal: use a built in jQuery method to hide the item */
+    // Stretch goal: use a built in jQuery method to hide the item
+      this.element.removeClass("tabs-item-selected");
   }
+
 }
 
 class TabsLink {
-  constructor($element, parent) {
+    constructor($element, parent, index) {
     // Attach the element to this instance of the TabsLink class
-    this.element;
+      this.element = $($element);
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
-    /* Use the getTab method on the parent to find the corresponding TabItem for this link
-       hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab();
+      this.tabs = parent;
+    // Use the getTab method on the parent to find the corresponding TabItem for this link
+    //   hint: use the data-tab attribute 
+      this.myIndex = index + 1;
+	this.tabsItem = parent.getTab(this.myIndex);
+	console.log(this.tabsItem);
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem;
-    /* Add an click event to the main element, this will update the active tab on the parent, 
-       and should call select on this tab */
-    this.element.click( () => {
-      this.tabs.updateActive(this);
-
+      this.tabsItem = new TabsItem(this.tabsItem);
+    // Add an click event to the main element, this will update the active tab on the parent, 
+    //   and should call select on this tab
+      this.element.click( () => {
+	  this.tabs.updateActive(this, this);
     });
   };
 
   select() {
     // add selected class to this link
+      this.element.addClass(["tabs-link-selected"]);
     // select the associated tab item
+      this.tabsItem.select();
   }
 
   deselect() {
     // deselect this link
-    // deselect the associated tab item
+      this.element.removeClass(["tabs-link-selected"]);
+      // deselect the associated tab item
+      console.log(this.element);
+      this.tabsItem.deselect();
   }
-}
 
+}
 class Tabs {
   constructor($element) {
-    this.element = $element;
+      this.element = $($element);
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links;
+      this.links = this.element.find(".tabs-link");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
-    this.links = this.links.map((index, link) => {
-      return new TabsLink($(link), this);
+      this.links = this.links.map((index, link) => {
+	  return new TabsLink($(link), this, index);
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink;
-    this.init();
+      this.activeLink = this.links[0];
+      this.init();
+      console.log("This is a console log.");
   }
 
   init() {
     // Select the first link and tab upon ititialization
+      this.links[0].select();
+
   }
 
   updateActive(newActive) {
     // Deselect the old active link
-
-    // Assign the new active link
-
+      this.activeLink.deselect();
+      // Assign the new active link
+      console.log("help!");
+      this.activeLink = this.newActive;
+      newActive.select();
   }
 
   getTab(data) {
-    // Use the tab item classname and the data attribute to select the proper item
+      // Use the tab item classname and the data attribute to select the proper item
+      return (`.tabs-item[-tab=\"${data}\"]`);
   }
 
 }
 
+
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
-tabs = tabs.map();
+let tabs = $(".tabs");
+tabs = tabs.map(function(index, element) {
+    new Tabs(element);
+    console.log("Kelly");
+});
 
