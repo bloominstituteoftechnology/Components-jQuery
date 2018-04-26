@@ -1,6 +1,6 @@
 class Dropdown {
   constructor($element) {
-    this.element 
+    this.element = 
     // Select button and content from the element
     this.button
     this.content 
