@@ -1,16 +1,16 @@
 
 class TabsItem {
   constructor($element) {
-    // Attach dom element to object. Example in Tabs class
+    this.element = $element;
   }
 
   select() {
-    // Selects the item by adding a class
+    this.element.addClass('tabs-item-selected'); // Add selected class to tab item
     /* Stretch goal: use a built in jQuery method to show the item */
   }
 
   deselect() {
-    // Deselects the item by removing a class
+    this.element.removeClass('tabs-item-selected'); // Removes selected class from tab item
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
