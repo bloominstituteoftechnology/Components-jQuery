@@ -5,13 +5,17 @@ class TabsItem {
   }
 
   select() {
-    this.element.addClass('tabs-item-selected'); // Add selected class to tab item
-    /* Stretch goal: use a built in jQuery method to show the item */
+    // this.element.addClass('tabs-item-selected');
+
+    // Stretch goal: use a built in jQuery method to show the item
+    this.element.show();
   }
 
   deselect() {
-    this.element.removeClass('tabs-item-selected'); // Removes selected class from tab item
-    /* Stretch goal: use a built in jQuery method to hide the item */
+    // this.element.removeClass('tabs-item-selected');
+
+    // Stretch goal: use a built in jQuery method to hide the item
+    this.element.hide();
   }
 }
 
