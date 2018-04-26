@@ -25,25 +25,28 @@ class TabsLink {
     this.tabs = $(parent);
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab(".tab-items");
+    this.tabsItem = parent.getTab(this.element.data('tab'));
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem;
+    this.tabsItem = new TabsItem(this.tabsItem);
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
     this.element.click( () => {
-      this.tabs.updateActive(this);
-
+      parent.updateActive(this);
     });
   };
 
   select() {
     // add selected class to this link
     // select the associated tab item
+    this.element.addClass("tabs-link-selected");
+    this.tabsItem.select();
   }
 
   deselect() {
     // deselect this link
     // deselect the associated tab item
+    this.element.removeClass("tabs-link-selected");
+    this.tabsItem.deselect();
   }
 }
 
@@ -52,7 +55,7 @@ class Tabs {
     this.element = $(element);
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links = this.element.find(".tabs-links");
+    this.links = this.element.find(".tabs-link");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
@@ -73,7 +76,7 @@ class Tabs {
     // Deselect the old active link
     this.activeLink.deselect();
     // Assign the new active link
-    this.activeLink = changeActive;
+    this.activeLink = newActive;
     this.activeLink.select();
   }
 
