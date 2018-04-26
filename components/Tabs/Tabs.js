@@ -7,7 +7,7 @@ class TabsItem {
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
-    this.element.fadeToggle();
+    this.element.slideToggle(200);
   }
 
   deselect() {
