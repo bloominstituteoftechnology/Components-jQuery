@@ -1,9 +1,12 @@
+//Work by Marco Guzman & Luis Martinez
+
+
 class Dropdown {
   constructor($element) {
-    this.element 
+    this.element
     // Select button and content from the element
     this.button
-    this.content 
+    this.content
     // Add a click handler to the button
 
   }
