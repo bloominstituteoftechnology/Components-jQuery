@@ -40,7 +40,7 @@ class TabsLink {
 class Tabs {
   constructor($element) {
     this.element = $element;
-    this.links = this.elements.find('.tabs-link'); // Get all tab links in this instance of tabs
+    this.links = this.element.find('.tabs-link'); // Get all tab links in this instance of tabs
     this.links = this.links.map((index, link) => { // Create a TabsLink instance for each tab link in this instance of tabs
       return new TabsLink($(link), this);
     });
@@ -65,6 +65,6 @@ class Tabs {
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
-tabs = tabs.map();
+let tabs = $('.tabs');
+tabs = tabs.map((index, tabs) => new Tabs($(tabs)));
 
