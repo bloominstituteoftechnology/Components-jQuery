@@ -2,25 +2,28 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $element;
   }
 
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
+    this.element.fadeToggle();
   }
 
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
+    this.element.hide( "fast" );
   }
 }
 
 class TabsLink {
   constructor($element, parent) {
     // Attach the element to this instance of the TabsLink class
-    this.element;
+    this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
+    this.tabs = parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
     this.tabsItem = parent.getTab();
