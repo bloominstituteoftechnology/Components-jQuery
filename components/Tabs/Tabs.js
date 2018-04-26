@@ -48,35 +48,27 @@ class TabsLink {
 class Tabs {
   constructor($element) {
     this.element = $element;
-
-    // Using jQuery's .find method, get an array of all links on the element
-    this.links;
-
-    // This step will map over the array creating new TabsLink class isntances of each link.
-    this.links = this.links.map((index, link) => {
+    this.links = this.elements.find('.tabs-link'); // Get all tab links in this instance of tabs
+    this.links = this.links.map((index, link) => { // Create a TabsLink instance for each tab link in this instance of tabs
       return new TabsLink($(link), this);
     });
-
-    // Select the first Link and set it to the activeLink
-    this.activeLink;
+    this.activeLink = this.links[0]; // Set first tab link to activeLink
     this.init();
   }
 
   init() {
-    // Select the first link and tab upon ititialization
+    this.activeLink.select(); // Select the first link and tab init
   }
 
   updateActive(newActive) {
-    // Deselect the old active link
-
-    // Assign the new active link
-
+    this.activeLink.deselect(); // Deselect old active link
+    this.activeLink = newActive; // Track new active link
+    this.activeLink.select(); // Select new active link
   }
 
   getTab(data) {
-    // Use the tab item classname and the data attribute to select the proper item
+    return $(`.tabs-item[data-tab="${data}"]`); // Select and return proper tab item
   }
-
 }
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
