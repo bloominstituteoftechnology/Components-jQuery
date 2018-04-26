@@ -10,7 +10,7 @@ class Dropdown {
 
   toggleContent() {
     // Add/remove class to/from content
-    this.content.toggle('.dropdown-hidden');
+    this.content.toggleClass('dropdown-hidden');
   }
 }
 
