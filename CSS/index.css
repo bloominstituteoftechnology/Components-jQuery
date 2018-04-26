@@ -41,9 +41,6 @@
   color: #ffffff;
   background-color: #931d25;
 }
-.dropdown .dropdown-hidden {
-  display: none;
-}
 .tabs {
   width: 100%;
 }
@@ -55,16 +52,12 @@
   padding-top: 60px;
 }
 .tabs .tabs-item {
-  display: none;
   width: 75%;
 }
 .tabs .tabs-item .tabs-item-title {
   font-size: 24px;
   font-weight: bold;
   padding-bottom: 10px;
-}
-.tabs .tabs-item-selected {
-  display: block;
 }
 .tabs .tabs-links {
   display: flex;

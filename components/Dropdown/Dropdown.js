@@ -1,15 +1,24 @@
 class Dropdown {
   constructor($element) {
-    this.element 
-    // Select button and content from the element
-    this.button
-    this.content 
-    // Add a click handler to the button
+    this.element = $element;
+    this.button = this.element.find('.dropdown-button');
+    this.content = this.element.find('.dropdown-content');
+    this.button.click(() => {this.toggleContent()});
+    this.init();
+  }
 
+  // Stretch goal: Refactor LESS using jQuery; got rid of display: none on dropdown content
+  init(){
+    this.content.hide();
   }
 
   toggleContent() {
-    // Add/remove class to/from content
+    // Stretch: Slide up/down animation
+    if(this.content.is(':hidden')){
+      this.content.slideDown();
+    } else {
+      this.content.slideUp();
+    }
   }
 }
 
