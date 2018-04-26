@@ -44,6 +44,9 @@
 .dropdown .dropdown-hidden {
   display: none;
 }
+.show--box {
+  display: block;
+}
 .tabs {
   width: 100%;
 }
