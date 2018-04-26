@@ -14,7 +14,6 @@ class Dropdown {
   toggleContent() {
     // Add/remove class to/from content
     this.content.toggleClass('dropdown-hidden');
-    console.log("kjskdvns");
   }
 }
 
