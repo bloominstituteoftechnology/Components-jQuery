@@ -13,7 +13,8 @@ class Dropdown {
 
   toggleContent() {
     // Add/remove class to/from content
-    this.toggleContent('.dropdown-content')
+    // this.content.toggleClass('dropdown-hidden') //not cool animation
+    this.content.toggle('dropdown-content') // cool animation
   }
 }
 
