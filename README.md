@@ -17,7 +17,7 @@ In this project, our design team has already built an HTML/CSS web page for us, 
   * With your knowledge of the HTML and CSS, complete the `Dropdown.js` file. You will be creating a dropdown component.
 
 #### Part Two (Tabs):
-* Now that we have an idea of how to create a component with a single class, we will be creating a complex component made up of two smaller components. The greater component wrapper will be called `Tabs` and the smaller component within it will be called `TabsLink` and `TabsItem`.
+* Now that we have an idea of how to create a component with a single class, we will be creating a complex component made up of two smaller components. The greater component wrapper will be called `Tabs` and the smaller components within it will be called `TabsLink` and `TabsItem`.
   * The `Tabs` component will be the overall wrapper of the sub components. This higher level component will find and create the sub components within it. This component will also keep track of which tab is currently selected, maintaining the state of the component as a whole. It will also act as liaison to the sub-components getting data from other sub-components for them. 
   * The `TabsLink` component will be on each of what we may consider the `tabs` on top of the box. These links will control the associated item, as well as selecting and deselecting themselves.
   * The `TabsItem` component will be the text displayed when a tab is selected. It will share a data attribute with it's corresponding tab, and should only show when it's tab has been selected.
@@ -34,3 +34,6 @@ In this project, our design team has already built an HTML/CSS web page for us, 
 * Add styling using the LESS files.
 * Remove the boxes on the top card and replace them with an image carousel. This will have to be done from scratch, and should be pretty difficult, but it uses the same techniques as the `Tabs` component. Give it a left and right button, and a number of images that scroll as the buttons are pressed.
   
+------
+
+Project Start!
