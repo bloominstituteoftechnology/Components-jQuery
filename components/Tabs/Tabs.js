@@ -31,15 +31,12 @@ class TabsLink {
     this.tabs = $(parent);
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab(this.element.data('tab'));
+    this.tabsItem = parent.getTab(element.data('tab'));
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem = new TabsItem(this.tabsItem);
+    this.tabsItem = new TabsItem(tabsItem);
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
-    this.element.click( () => {
-      this.tabs.updateActive(this);
-      this.select();
-    });
+    this.element.click(function() { this.tab.updateActive() });
   };
 
   select() {
