@@ -22,17 +22,16 @@ class TabsLink {
     // Attach the element to this instance of the TabsLink class
     this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs = parent;
+    this.tabs = $parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab(this.element[0].dataset.tab);
+    this.tabsItem = parent.getTab(this.element.data('tabs'));
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
     this.tabsItem = new TabsItem(this.tabsItem)
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
     this.element.click(() => {
       this.tabs.updateActive(this);
-
     });
   };
 
@@ -40,14 +39,16 @@ class TabsLink {
     // add selected class to this link
     // select the associated tab item
     this.element.addClass('tabs-link-selected')
-    this.tabsItem.element.addClass('tabs-item-selected')
+    //this.tabsItem.element.addClass('tabs-item-selected')
+    this.tabsItem.select();
   }
 
   deselect() {
     // deselect this link
     // deselect the associated tab item
     this.element.removeClass('tabs-link-selected')
-    this.tabsItem.element.removeClass('tabs-item-selected')
+    //this.tabsItem.element.removeClass('tabs-item-selected')
+    this.tabsItem.deselect();
   }
 }
 
@@ -75,15 +76,15 @@ class Tabs {
 
   updateActive(newActive) {
     // Deselect the old active link
-    this.links.map((index, link) => link.deselect());
+    this.activeLink.deselect();
     // Assign the new active link
-    newActive.select();
+    this.activeLink = newActive; 
+    this.activeLink.select();
   }
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
-    let x = $('.tabs-items').find(`[data-tab='${data}']`);
-    return x;
+    return $(`.tabs-item[data-tab="${data}"]`);
   }
 
 }
