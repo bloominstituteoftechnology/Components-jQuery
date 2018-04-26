@@ -1,4 +1,3 @@
-
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
@@ -14,7 +13,7 @@ class TabsItem {
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
-    this.element.hide( "fast" );
+    this.element.hide( "slow" );
   }
 }
 
@@ -33,7 +32,7 @@ class TabsLink {
        and should call select on this tab */
     this.element.click( () => {
       this.tabs.updateActive(this);
-      this.select;
+      this.select();
     });
   };
 
@@ -57,7 +56,7 @@ class Tabs {
     this.element = $element;
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links;
+    this.links = $('.tabs-link');
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
@@ -65,29 +64,29 @@ class Tabs {
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink;
+    this.activeLink = this.links[0];
     this.init();
   }
 
   init() {
     // Select the first link and tab upon ititialization
+    this.activeLink.select();
   }
 
   updateActive(newActive) {
     // Deselect the old active link
-
+    this.activeLink.deselect();
     // Assign the new active link
-
+    this.activeLink = newActive;
   }
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
+    return this.element.find(`.tabs-item[data-tab="${data}"]`);
   }
-
 }
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
-tabs = tabs.map();
-
+let tabs = $('.tabs');
+tabs = tabs.map((index, tab) => new Tabs($(tab)));
