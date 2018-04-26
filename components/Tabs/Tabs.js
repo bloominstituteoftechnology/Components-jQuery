@@ -8,7 +8,9 @@ class TabsItem {
     // this.element.addClass('tabs-item-selected');
 
     // Stretch goal: use a built in jQuery method to show the item
-    this.element.show();
+    // this.element.show();
+
+    this.element.fadeIn(); // Stretch goal: Get tab text to fade in
   }
 
   deselect() {
