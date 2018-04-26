@@ -2,15 +2,20 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $element;
   }
 
   select() {
     // Selects the item by adding a class
+    this.element.show();
+
     /* Stretch goal: use a built in jQuery method to show the item */
   }
 
   deselect() {
     // Deselects the item by removing a class
+    this.element.hide();
+
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
@@ -18,9 +23,9 @@ class TabsItem {
 class TabsLink {
   constructor($element, parent) {
     // Attach the element to this instance of the TabsLink class
-    this.element;
+    this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
+    this.tabs = parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
     this.tabsItem = parent.getTab();
@@ -50,15 +55,15 @@ class Tabs {
     this.element = $element;
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links;
+    this.links = $(element).find('.tabs-link');
 
-    // This step will map over the array creating new TabsLink class isntances of each link.
+    // This step will map over the array creating new TabsLink class instances of each link.
     this.links = this.links.map((index, link) => {
       return new TabsLink($(link), this);
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink;
+    this.activeLink();
     this.init();
   }
 
@@ -75,12 +80,15 @@ class Tabs {
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
+    TabsItem (data-tab = data);
   }
 
 }
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
-tabs = tabs.map();
+let tabs = $('.tabs'); //! not sure if .tabs is right
+tabs = tabs.map(function(_, element) {
+  new Tabs(element)
+});
 
