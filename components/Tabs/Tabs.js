@@ -13,7 +13,7 @@ class TabsItem {
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
-    this.element.hide( "slow" );
+    this.element.hide( "fast" );
   }
 }
 
