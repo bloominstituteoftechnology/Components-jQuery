@@ -7,13 +7,19 @@ class TabsItem {
 
   select() {
     // Selects the item by adding a class
-    this.element.addClass("tabs-item-selected");
+    // this.element.addClass("tabs-item-selected");
+
+    // display tab using jQuery animation
+    this.element.fadeIn();
     /* Stretch goal: use a built in jQuery method to show the item */
   }
 
   deselect() {
     // Deselects the item by removing a class
-    this.element.removeClass("tabs-item-selected");
+    // this.element.removeClass("tabs-item-selected");
+
+    // hide tab using jQuery animation
+    this.element.hide();
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
