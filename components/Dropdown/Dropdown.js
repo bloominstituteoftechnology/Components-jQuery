@@ -7,7 +7,14 @@ class Dropdown {
   }
 
   toggleContent() {
-    this.content.toggleClass('dropdown-hidden'); // Add/remove class to/from content
+    // this.content.toggleClass('dropdown-hidden');
+
+    // Stretch: Slide up/down animation
+    if(this.content.is(':hidden')){
+      this.content.slideDown();
+    } else {
+      this.content.slideUp();
+    }
   }
 }
 
