@@ -2,15 +2,19 @@
 class TabsItem {
   constructor(element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $(element);
   }
 
   select() {
     // Selects the item by adding a class
+    this.element.addClass("tabs-item-selected")
+    // console.log('click2')
     /* Stretch goal: use a built in jQuery method to show the item */
   }
 
   deselect() {
     // Deselects the item by removing a class
+    this.element.removeClass("tabs-item-selected")
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
@@ -29,19 +33,25 @@ class TabsLink {
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
     this.element.click( () => {
-      this.tabs.updateActive(this);
-
+      parent.updateActive(this);
+      // console.log('click')
     });
   };
 
   select() {
     // add selected class to this link
+    this.element.addClass("tabs-link-selected");
     // select the associated tab item
+    this.tabsItem.select();
+    // console.log('click1')
   }
 
   deselect() {
     // deselect this link
+    this.element.removeClass("tabs-link-selected");
     // deselect the associated tab item
+    this.tabsItem.deselect();
+    // console.log('click1')
   }
 }
 
@@ -50,7 +60,7 @@ class Tabs {
     this.element = $(element);
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links = this.element.find(".tabs-links")
+    this.links = this.element.find(".tabs-link")
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
@@ -69,14 +79,16 @@ class Tabs {
 
   updateActive(newActive) {
     // Deselect the old active link
-
+    this.activeLink.deselect();
     // Assign the new active link
+    this.activeLink = newActive;
+    this.activeLink.select();
 
   }
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
-    return $(`.tabs-item[data-tab="${this.data}"]`)
+    return $(`.tabs-item[data-tab="${data}"]`)
   }
 
 }
@@ -84,7 +96,7 @@ class Tabs {
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
 let tabs = $(".tabs");
-tabs = tabs.map(function(index, element) {
+tabs = tabs.map((index, element) => {
   new Tabs(element)
 });
 
