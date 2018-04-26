@@ -65,30 +65,35 @@ class Tabs {
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink = this.links;
+    this.activeLink = this.links[0];
     this.init();
   }
 
   init() {
     // Select the first link and tab upon initialization
-    return links[0];
+    this.activeLink.select();
   }
 
   updateActive(newActive) {
     // Deselect the old active link
-
+    this.activeLink.deselect();
     // Assign the new active link
-
+    this.activeLink = newTab;
+    this.activeLink.select();
   }
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
+    this.tabsItem = element.dataset.tab;
+    this.tabsItems = $(`.box[data-tab="${this.tabsItem}"]`);
   }
 
 }
 
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
-let tabs = $();
-tabs = tabs.map();
+let tabs = $('.tabs');
+tabs = tabs.map(function(index, element) {
+  new Tabs(element);
+});
 
