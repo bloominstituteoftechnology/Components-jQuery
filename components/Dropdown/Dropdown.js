@@ -2,19 +2,20 @@ class Dropdown {
   constructor(element) {
     this.element = $(element);
     // Select button and content from the element
-    this.button = this.element.find(".dropdown-button");
-    this.content = this.element.find(".dropdown-content");
+    this.button = this.element.find('.dropdown-button');
+    this.content = this.element.find('.dropdown-content');
     // Add a click handler to the button
     this.button.click(() => {
-      this.toggleContent();
+      this.toggleContent()
     });
   }
 
   toggleContent(event) {
     // Add/remove class to/from content
-    this.content.toggleClass("dropdown-hidden")
+    this.content.toggleClass("dropdown-hidden");
   }
 }
 
 let dropdown = $('.dropdown');
 dropdown = new Dropdown(dropdown);
+

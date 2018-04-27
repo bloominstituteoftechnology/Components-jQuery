@@ -31,6 +31,7 @@ class TabsLink {
        and should call select on this tab */
     this.element.click( () => {
       parent.updateActive(this);
+      this.select;
     });
   };
 
@@ -54,15 +55,15 @@ class Tabs {
     this.element = $(element);
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links = this.element.find(".tabs-link");
+    this.links = this.element.find('.tabs-link');
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
-      return new TabsLink(link, this);
+      return new TabsLink(link, this); //  WHY IS 'this' A PARAMETER HERE?
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink = this.links[0];
+    this.activeLink = this.links[0]; //  SELECTS THE FIRST ITEM IN THE RETURNED ARRAY OF LINKS
     this.init();
   }
 
@@ -89,6 +90,11 @@ class Tabs {
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
 let tabs = $('.tabs');
-tabs = tabs.map(function(index, element) {
+
+tabs = tabs.map((index, element) => {
   new Tabs(element);
-});
+ });
+
+
+
+
