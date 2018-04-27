@@ -6,13 +6,13 @@ class Dropdown {
     this.content = $(".dropdown-content");
     // Add a click handler to the button
     this.button.click(() => {
-      this.toggleContent();
+      this.content.slideToggle(200, this.toggleContent);
     })
   }
 
   toggleContent() {
     // Add/remove class to/from content
-    this.content.toggleClass("dropdown-hidden");
+    $(".dropdown-content").toggleClass("dropdown-hidden");
   }
 }
 
