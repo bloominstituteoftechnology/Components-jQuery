@@ -15,6 +15,7 @@ class TabsItem {
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
+    this.element.toggleClass('tabs-item-selected');
   }
 }
 
@@ -38,9 +39,16 @@ class TabsLink {
        and should call select on this tab */
     this.element.click( (e) => {
       console.log('Link clicked');
-      this.tabs.updateActive(this);
-      this.select();
-      //this.element = $element
+      console.log(this); // 'this' is a reference to the Class TabsLink's instance.
+      console.log(this.element); // 'this.element' is the jQuery Object that wraps the DOM-Element.
+      console.log(e.target); // e.target is a 'reference to a DOM object
+      
+      /** It is neccesary to pass as an argument to updateActive() the reference to the instance
+       * NO a reference to this.element. this.element is ONLY accesible whitin the guts of the instance,
+       * is no posible the handle/manipulate that property from an outer Scope.
+       */
+      this.tabs.updateActive(this); // pass a reference to the Class TabsLink's instance.
+
     });
   };
 
@@ -56,7 +64,8 @@ class TabsLink {
     console.log('hello form Link.deselect()')
     // deselect this link
     // deselect the associated tab item
-    this.element.toggleClass('tabs-link-selected');
+    this.element.removeClass('tabs-link-selected');
+    this.tabsItem.deselect();
   }
 }
 
@@ -80,9 +89,10 @@ class Tabs {
 
   init() {
     this.activeLink.select();
+    // this.activeLink.toggleClass('tabs-link-selected');
     
     /**
-     * this.activeLink IS JUST A 'REFERENCE' TO THE CLASS TansLink INSTANCE.
+     * this.activeLink IS JUST A 'REFERENCE' TO THE CLASS's TansLink INSTANCE.
      * IS NO POSIBLE TO MANIPULATE ITS INTERNAL PROPERTIES
      * The properties are in a Closure, and some of them are inaccesible
      * from the outer Scope.
@@ -98,11 +108,15 @@ class Tabs {
     
   }
 
-  updateActive(newActive) {
-    console.log('Hello from tabinit()')
+  updateActive($newActive) {
+    console.log('Hello from updateActive()')
+    console.log($newActive)
     // Deselect the old active link
     // Assign the new active link
-    this.activeLink = $(newActive);
+    
+    this.activeLink.deselect();
+    $newActive.select();
+    this.activeLink = $newActive;
   }
 
   getTab(data) {
