@@ -8,7 +8,8 @@ class TabsItem {
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
-    
+    console.log('hello form TabsItem.select()');
+    this.element.addClass('tabs-item-selected');
   }
 
   deselect() {
@@ -19,25 +20,20 @@ class TabsItem {
 
 class TabsLink {
   constructor($element, parent) {
-    // console.log('inside link constructor')
     // Attach the element to this instance of the TabsLink class
     this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
     this.tabs = parent;
-    // console.log('parent',parent);
-    // console.log('parent.getTab',parent.getTab);
     /* Use the getTab method on the parent to find the corresponding
        TabItem for this link
        hint: use the data-tab attribute 
     */
-  //  console.log('this.element.dataset.tab',this.element.dataset.tab);
-   this.tabsItem = parent.getTab(this.element.data('tab'));
-  //  console.log('this.tabsItem',this.tabsItem)
+    this.tabsItem = parent.getTab(this.element.data('tab'));
     /* Reassign this.tabsItem to be a new instance
-       of TabsItem, passing it this.tabsItem */
+       of TabsItem, passing it this.tabsItem 
+    */
     this.tabsItem = new TabsItem($(this.tabsItem));
-    
-    /* Add an click event to the main element,
+    /* Add a click event to the main element,
        this will update the active tab on the parent, 
        and should call select on this tab */
     this.element.click( (e) => {
@@ -49,10 +45,11 @@ class TabsLink {
   };
 
   select() {
-    console.log('hello form Link.select()')
+    console.log('hello form Link.select()');
     // add selected class to this link
     // select the associated tab item
     this.element.toggleClass('tabs-link-selected');
+    this.tabsItem.select();
   }
   
   deselect() {
@@ -85,13 +82,18 @@ class Tabs {
     this.activeLink.select();
     
     /**
-     * this.activeLink IS JUST A 'REFERENCE' TO THE CLASS INSTANCE.
+     * this.activeLink IS JUST A 'REFERENCE' TO THE CLASS TansLink INSTANCE.
      * IS NO POSIBLE TO MANIPULATE ITS INTERNAL PROPERTIES
      * The properties are in a Closure, and some of them are inaccesible
      * from the outer Scope.
      * 
      * Thus this code do not works:
-     * this.activeLink.addClass('tabs-link-selected'); 
+     * this.activeLink.addClass('tabs-link-selected');
+     * 
+     * The only way to manipulate the instance is through its 'methods':
+     *    TabsLink.select()
+     * and
+     *    TabsLink.deselect()
     */
     
   }
@@ -117,13 +119,20 @@ class Tabs {
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
 
-console.log(document.querySelector('.tabs'));
+console.log(document.querySelector('.tabs')); // DOM Node
 
-let tabs = $('.tabs');
+let tabs = $('.tabs'); // jQuery Object
 console.log(tabs);
 
-// tabs = new Tabs(tabs);
-tabs = tabs.map(( (i,t) => new Tabs($(t)) ));
-// tabs = tabs.map(( (i,t) => new Tabs(t) ));
-tabs.toggleClass('hola');
+// tabs = new Tabs($(tabs)); // works - pass a jQuery Object
+// tabs = new Tabs(tabs); // works - pass a jQuery Object
+tabs = tabs.map(( (i,t) => new Tabs($(t)) )); // works - we pass to the constructor a jQuery Object.
+// tabs = tabs.map(( (i,t) => new Tabs(t) )); // do not works - we are passing a DOM-Node
 
+
+/** Accessing the element whit regular DOM manipulation
+ * No access to the Classes methods and properties.
+ */
+let tabsDOM = document.querySelector('.tabs');
+// console.log(tabsDOM);
+tabsDOM.classList.add('caracola');

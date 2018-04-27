@@ -1,6 +1,7 @@
 class Dropdown {
   constructor(element) {
-    this.element = $(element);
+    // this.element = $(element);
+    this.element = element;
     // Select button and content from the element
     this.button = this.element.find('.dropdown-button');
     this.content = this.element.find('.dropdown-content');
@@ -19,3 +20,4 @@ class Dropdown {
 
 let $dropdown = $('.dropdown');
 $dropdown = new Dropdown($dropdown);
+console.log($dropdown); //jQuery object
