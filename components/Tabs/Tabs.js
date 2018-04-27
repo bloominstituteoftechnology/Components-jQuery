@@ -8,7 +8,7 @@ class TabsItem {
   select() {
     // Selects the item by adding a class
 
-    this.$element.addClass();
+    this.element.addClass("tabs-item-selected");
 
     /* Stretch goal: use a built in jQuery method to show the item */
   }
@@ -16,45 +16,43 @@ class TabsItem {
   deselect() {
     // Deselects the item by removing a class
 
-    this.$element.removeClass();
+    this.element.removeClass("tabs-item-selected");
     /* Stretch goal: use a built in jQuery method to hide the item */
   }
 }
-
-let tabsItem = new TabsItem(".tabs-item");
 
 class TabsLink {
   constructor($element, parent) {
     // Attach the element to this instance of the TabsLink class
     this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tab = parent;
+    this.tabs = parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab($element.dataset.tab);
+    this.tabsItem = parent.getTab($element.data("tab"));
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem = new TabsItem(tabsItem);
+    this.tabsItem = new TabsItem(this.tabsItem);
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
-    this.$element.click(function() { this.tab.updateActive() });
-  };
-
+    this.element.click( () => {
+      this.tabs.updateActive(this);
+      this.select();
+    });
+}
   select() {
     // add selected class to this link
-    this.$element.addClass();
+    this.element.addClass("tabs-link-selected");
     // select the associated tab item
     this.tabsItem.select();
   }
 
   deselect() {
     // deselect this link
-    this.$element.removeClass("tabs-link-selected");
+    this.element.removeClass("tabs-link-selected");
     // deselect the associated tab item
     this.tabsItem.deselect();
   }
 }
-
-//let tabsLink = new TabsLink(".tabs-link", ".tabs-links");
 
 class Tabs  {
   constructor($element) {
@@ -64,7 +62,7 @@ class Tabs  {
     this.links = $(".tabs-link");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
-    this.links = this.links.map(function(index, link) {
+    this.links = this.links.map((_, link) => {
       return new TabsLink($(link), this);
     });
 
@@ -89,7 +87,7 @@ class Tabs  {
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
     //absitem = new TabsItem(".tabs-item")
-    return this.$element.find(`.tabs-item[data-tab="${data}"]`);
+    return this.element.find(`.tabs-item[data-tab="${data}"]`);
   }
 
 }
@@ -98,6 +96,6 @@ class Tabs  {
    of the Tabs class with the element */
 let tabs = $(".tabs");
 tabs = tabs.map(function(_, element) {
-  return new Tabs(element);
+  return new Tabs($(element));
 });
 
