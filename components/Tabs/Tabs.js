@@ -1,6 +1,6 @@
 class TabsItem {
     constructor($element) {
-	// Attach dom element to object. Example in Tabs class
+// Attach dom element to object. Example in Tabs class
 	this.element = $element;
     }
 
@@ -26,13 +26,13 @@ class TabsLink {
       this.tabs = parent;
     // Use the getTab method on the parent to find the corresponding TabItem for this link
     //   hint: use the data-tab attribute 
-	this.tabsItem = parent.getTab(this.element.data("tab"));
+	this.tabsItem = parent.getTab(this.element.data('tab'));
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
       this.tabsItem = new TabsItem(this.tabsItem);
     // Add an click event to the main element, this will update the active tab on the parent, 
     //   and should call select on this tab
       this.element.click( () => {
-	  this.tabs.updateActive(this, this);
+	  this.tabs.updateActive(this);
     });
   };
 
@@ -46,9 +46,7 @@ class TabsLink {
   deselect() {
     // deselect this link
       this.element.removeClass("tabs-link-selected");
-      // deselect the associated tab item
-      console.log(this.element);
-      console.log("moxie");
+    // deselect the associated tab item
       this.tabsItem.deselect();
   }
 
@@ -67,8 +65,8 @@ class Tabs {
 
     // Select the first Link and set it to the activeLink
       this.activeLink = this.links[0];
-      this.init();
-      console.log("This is a console log.");
+    //  this.init();
+    //  console.log("This is a console log.");
   }
 
   init() {
@@ -81,6 +79,7 @@ class Tabs {
     // Deselect the old active link
       this.activeLink.deselect();
       // Assign the new active link
+      newActive.select();
       this.activeLink = newActive;
   }
 
@@ -95,5 +94,5 @@ class Tabs {
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
 let tabs = $(".tabs");
-tabs = tabs.map((index, tab) => new Tabs($(tab)));
+tabs = tabs.map((index, element) => new Tabs($(element)));
 
