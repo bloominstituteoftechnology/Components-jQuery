@@ -2,30 +2,34 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
+    this.element = $element;
   }
-
   select() {
     // Selects the item by adding a class
+    this.element.classList.add("tabs-item-selected");
     /* Stretch goal: use a built in jQuery method to show the item */
+    // this.element.addClass('tabs-item-selected');
   }
 
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
+    this.element.classList.remove("tabs-item-selected");
+    // this.element.removeClass('tabs-item-selected');
   }
 }
 
 class TabsLink {
   constructor($element, parent) {
     // Attach the element to this instance of the TabsLink class
-    this.element;
+    this.element = $element;
     // Attach Tabs (parent) to this instance of the TabsLink class
-    this.tabs;
+    this.tabs = parent;
     /* Use the getTab method on the parent to find the corresponding TabItem for this link
        hint: use the data-tab attribute */
-    this.tabsItem = parent.getTab();
+    this.tabsItem = parent.getTab(`.tab-link[data-tab='${this.tabs}']`);
     // Reassign this.tabsItem to be a new instance of TabsItem, passing it this.tabsItem
-    this.tabsItem;
+    this.tabsItem = this.tabsItem;
     /* Add an click event to the main element, this will update the active tab on the parent, 
        and should call select on this tab */
     this.element.click( () => {
@@ -36,11 +40,13 @@ class TabsLink {
 
   select() {
     // add selected class to this link
+    this.$element.classList.add("tabs-link-selected");
     // select the associated tab item
   }
 
   deselect() {
     // deselect this link
+    this.$element.classList.remove("tabs-link-selected");
     // deselect the associated tab item
   }
 }
@@ -50,7 +56,7 @@ class Tabs {
     this.element = $element;
 
     // Using jQuery's .find method, get an array of all links on the element
-    this.links;
+    this.linksthis.$element.classList.add("tabs-link-selected");
 
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
