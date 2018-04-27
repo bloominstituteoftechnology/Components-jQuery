@@ -7,13 +7,13 @@ class TabsItem {
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
-    this.element.addClass("tabs-item-selected");
+    this.element.slideDown(350, () => this.element.addClass("tabs-item-selected"))
   }
 
   deselect() {
     // Deselects the item by removing a class
     /* Stretch goal: use a built in jQuery method to hide the item */
-    this.element.removeClass("tabs-item-selected");
+    this.element.slideUp(350, () => this.element.removeClass("tabs-item-selected"));
   }
 }
 
@@ -83,6 +83,9 @@ class Tabs {
 
   getTab(data) {
     // Use the tab item classname and the data attribute to select the proper item
+    // console.log("data: ", data)
+    // console.log("data0:", data[0])
+    // console.log("data0.dataset", data[0].dataset.tab)
     let tabNum = data[0].dataset.tab;
     // console.log(data)
     return $(`.tabs-item[data-tab="${tabNum}"]`);
