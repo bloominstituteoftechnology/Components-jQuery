@@ -2,12 +2,13 @@
 class TabsItem {
   constructor($element) {
     // Attach dom element to object. Example in Tabs class
-    this.element = $($element);
+    this.element = $element;
   }
 
   select() {
     // Selects the item by adding a class
     /* Stretch goal: use a built in jQuery method to show the item */
+    
   }
 
   deselect() {
@@ -30,16 +31,16 @@ class TabsLink {
        hint: use the data-tab attribute 
     */
   //  console.log('this.element.dataset.tab',this.element.dataset.tab);
-   this.tabsItem = parent.getTab(this.element.dataset.tab);
+   this.tabsItem = parent.getTab(this.element.data('tab'));
   //  console.log('this.tabsItem',this.tabsItem)
     /* Reassign this.tabsItem to be a new instance
        of TabsItem, passing it this.tabsItem */
-    this.tabsItem = new TabsItem(this.tabsItem);
+    this.tabsItem = new TabsItem($(this.tabsItem));
     
     /* Add an click event to the main element,
        this will update the active tab on the parent, 
        and should call select on this tab */
-    this.element.click( () => {
+    this.element.click( (e) => {
       console.log('Link clicked');
       this.tabs.updateActive(this);
       this.select();
@@ -51,41 +52,48 @@ class TabsLink {
     console.log('hello form Link.select()')
     // add selected class to this link
     // select the associated tab item
+    this.element.toggleClass('tabs-link-selected');
   }
   
   deselect() {
     console.log('hello form Link.deselect()')
     // deselect this link
     // deselect the associated tab item
+    this.element.toggleClass('tabs-link-selected');
   }
 }
 
 class Tabs {
   constructor($element) {
-    console.log('inside TAbs constructor')
+    // this.element = $($element);
     this.element = $element;
     // Using jQuery's .find method, get an array of all links on the element
     this.links = this.element.find('.tabs-link');
-    // console.log('this.links', this.links);
-    // console.log('this.links.length', this.links.length);
     // This step will map over the array creating new TabsLink class isntances of each link.
     this.links = this.links.map((index, link) => {
-      // console.log('link',link);
-      // console.log('link.dataset.tab', link.dataset.tab);
-      return new TabsLink(link, this);
+      return new TabsLink($(link), this);
     });
 
     // Select the first Link and set it to the activeLink
-    this.activeLink = $(this.links[0]);
+    this.activeLink = this.links[0];
     console.log('this.activeLink',this.activeLink)
     this.init();
+    
   }
 
   init() {
-    console.log(this.activeLink.addClass('tabs-link-selected'));
-    this.activeLink.addClass('tabs-link-selected'); // DO NOT WORK
-    this.activeLink.toggleClass('tabs-link-selected'); // DO NOT WORK
-    document.querySelector('.tabs-link[data-tab="1"').classList.add('tabs-link-selected');
+    this.activeLink.select();
+    
+    /**
+     * this.activeLink IS JUST A 'REFERENCE' TO THE CLASS INSTANCE.
+     * IS NO POSIBLE TO MANIPULATE ITS INTERNAL PROPERTIES
+     * The properties are in a Closure, and some of them are inaccesible
+     * from the outer Scope.
+     * 
+     * Thus this code do not works:
+     * this.activeLink.addClass('tabs-link-selected'); 
+    */
+    
   }
 
   updateActive(newActive) {
@@ -109,8 +117,13 @@ class Tabs {
 /* Using jQuery, select all instances of the class tabs, map over it and create new instances 
    of the Tabs class with the element */
 
-  console.log(document.querySelector('.tabs'));
-   let tabs = $('.tabs');
-   console.log(tabs);
-tabs = new Tabs(tabs);
+console.log(document.querySelector('.tabs'));
+
+let tabs = $('.tabs');
+console.log(tabs);
+
+// tabs = new Tabs(tabs);
+tabs = tabs.map(( (i,t) => new Tabs($(t)) ));
+// tabs = tabs.map(( (i,t) => new Tabs(t) ));
+tabs.toggleClass('hola');
 
