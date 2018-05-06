@@ -5,9 +5,7 @@ class Dropdown {
     this.$button = $(".dropdown-button");
     this.$content = $(".dropdown-content");
     // Add a click handler to the button
-    this.$button.click( () => {
-      this.toggleContent();
-    });
+    this.$button.click( () => { this.toggleContent(); });
   }
 
   toggleContent() {
